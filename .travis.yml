@@ -1,6 +1,6 @@
 env:
   global:
-    - CODECOV_TOKEN=b040177c-c3c6-4607-aeaa-7e85545b708f
+    - CODECOV_TOKEN=9398368f-c443-4590-b225-5d88af52007e
 language: java
 jdk:
   - openjdk8
