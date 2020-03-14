@@ -38,7 +38,7 @@ flyway {
 ## Application configuration
 * Current application uses resources from `evbx-resources` service,
  please make sure that `evbx-resources` is running
-* Configure `ebvx-resources` server endpoint in `src/mainresources/application.yml`
+* Configure `ebvx-resources` server endpoint in `src/main/resources/application.yml`
 ```
 service:
   resource:
