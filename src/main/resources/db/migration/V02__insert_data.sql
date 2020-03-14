@@ -1,7 +1,3 @@
-DELETE FROM `description`;
-DELETE FROM `product_model`;
-DELETE FROM `product`;
-
 INSERT INTO product (product_name,created_by) VALUES
  ('Home Chargers','script'),
  ('Fast Chargers','script'),
@@ -21,14 +17,45 @@ INSERT INTO product_model (product_id,model_name,book_id,industry_report_id,spec
  ((SELECT id FROM product WHERE product_name LIKE 'Charging Management' limit 1),'Home', 7,7,7,'script'),
  ((SELECT id FROM product WHERE product_name LIKE 'Charging Management' limit 1),'Business',8,8,8,'script');
 INSERT INTO description (model_id,description_line,created_by) VALUES
- ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox HomeLine' limit 1),'Description-line-0','script'),
- ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox Elvi' limit 1),'Description-line-1','script'),
- ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox Troniq' limit 1),'Description-line-2','script'),
- ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox UlTroniq' limit 1),'Description-line-3','script'),
- ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox BusinessLine' limit 1),'Description-line-4','script'),
- ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox PublicLine' limit 1),'Description-line-5','script'),
- ((SELECT id FROM product_model WHERE model_name LIKE 'EV smart' limit 1),'Description-line-6','script'),
- ((SELECT id FROM product_model WHERE model_name LIKE 'Home' limit 1),'Description-line-7','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox HomeLine' limit 1),'Compatible with every EV','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox HomeLine' limit 1),'Reimbursement of charging costs','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox HomeLine' limit 1),'Dynamic load balancing compatible','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox HomeLine' limit 1),'Optional: leakage detection','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox HomeLine' limit 1),'Optional: always connected','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox Elvi' limit 1),'Compatible with every EV','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox Elvi' limit 1),'Reimbursement of charging costs','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox Elvi' limit 1),'Dynamic load balancing compatible','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox Elvi' limit 1),'Integrated leakage detection','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox Elvi' limit 1),'Always connected','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox Elvi' limit 1),'Upgradable and future proofd','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox Elvi' limit 1),'Realtime insights and full control','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox Troniq' limit 1),'EVBox Troniq is secure and user-friendly design makes it suitable for any environment and electric car. With its smart power management capabilities, multiple stations can be operated at a low-cost and in an energy-efficient manner.','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox Troniq' limit 1),'Equipped with a power(ful) output up to 50 kW, EVBox Troniq fast charging stations charge up to 125 km in 30 minutes (50 kW)','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox Troniq' limit 1),'With its unique auto-retractable cables, rugged high-impact housing, advanced heating system, and high-quality power electronic components, EVBox Troniq fast charging stations are built to last.','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox Troniq' limit 1),'From grid connection cost savings via optional battery storage to smart queuing capabilities, EVBox Troniq fast charging stations know how to consume power efficiently.','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox UlTroniq' limit 1),'EVBox Ultroniq offers ultra-fast charging with a power output of 175 – 350 kW. Meanwhile, it ensures an exceptional user experience thanks to its ergonomic auto-retractable cables, flexible architecture, and high-quality components.','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox UlTroniq' limit 1),'Equipped with a power(ful) output between 175 – 350 kW, EVBox Ultroniq fast charging stations can charge up to 400 km in just 15 mins (350 kW).','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox UlTroniq' limit 1),'With its unique auto-retractable cables, rugged high-impact housing, advanced heating system, and high-quality power components, EVBox Ultroniq ultra-fast charging stations are fully reliable and built to last.','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox UlTroniq' limit 1),'Thanks to its flexible architecture, EVBox Ultroniq fast charging stations fit well in any space and are suitable for every use case around the world.','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox BusinessLine' limit 1),'With its intelligent software, EVBox BusinessLine is easy to manage and makes efficient use of energy. BusinessLine is designed to suit your needs, from workplace and hospitality to fleet management and more.','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox BusinessLine' limit 1),'EVBox BusinessLine is interior has been intelligently redesigned to make it smarter and more scalable. Load balancing reduces infrastructure and energy costs, while the Hub-Satellite configuration of up to 20 charging points reduces management costs.','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox BusinessLine' limit 1),'Built with Wi-Fi and 4G connection by default, EVBox BusinessLine stays connected so you can track and manage your charging stations, receive automatic firmware updates, and earn money from guest charging sessions.','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox BusinessLine' limit 1),'Our best-selling EVBox BusinessLine is taking its reliability up another notch with this new generation. It combines our durable, weatherproof design with integrated security and earth leakage detection.','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox PublicLine' limit 1),'EVBox PublicLine is compatible with all grid networks and is available with double connectors. Its iconic LED-ring provides a clear status indication, making PublicLine a friendly face for electric drivers at day and night.','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox PublicLine' limit 1),'We make it our priority to maintain safe and efficient charging at all times, without affecting any of your other facilities. With adjustable charging rates and Smart Charging configurations, EVBox PublicLine ensures an energy-efficient distribution of the available power over multiple charging stations and locations.','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EVBox PublicLine' limit 1),'We know you have got plenty of other things on your hands. This is why were are made EVBox PublicLine vandal proof, non-flammable and discoloration proof. Its robust and modular build makes the charger the strongest one around.','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EV smart' limit 1),'EVBox Smart Charging safely balances the energy usage between your electric car charging station and other appliances on-site. This ensures the most efficient charging of your electric car based on the available power capacity.','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EV smart' limit 1),'Using dynamic load balancing, EVBox Smart Charging safely balances the energy usage between your electric car charging station and other appliances on-site. This ensures the most efficient use of the power capacity available and saves you from the costs of any grid upgrades.','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EV smart' limit 1),'With the option to integrate with your solar installation, EVBox Smart Charging connects the power you generate to your charging station, enabling charging sessions to become more self-sufficient and eco-friendly.','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'EV smart' limit 1),'By providing real-time data on your energy usage, solar production, and the associated costs, EVBox Smart Charging gives you full clarity and control over how energy flows through your building via your phone and computer.','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'Home' limit 1),'Start charging via the charge card or remotely via the Hey EVBox app','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'Home' limit 1),'View/download charging transactions','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'Business' limit 1),'Start charging via the charge card or remotely via the Hey EVBox app','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'Business' limit 1),'View/download charging transactions','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'Business' limit 1),'Manage up to 20 Hub-Satellite charging points without extra fees','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'Business' limit 1),'Distribute available power between charging points with Load Balancing','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'Business' limit 1),'Publish your station online and set a tariff for charging sessions','script'),
+ ((SELECT id FROM product_model WHERE model_name LIKE 'Business' limit 1),'Automatic reimbursement of charging costs for your employees','script'),
  ((SELECT id FROM product_model WHERE model_name LIKE 'Business' limit 1),'Description-line-8','script');
 
 

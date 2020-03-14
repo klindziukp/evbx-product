@@ -44,7 +44,7 @@ public class Description extends UpdatableEntity {
 
     @Column(name = "description_line")
     @JsonProperty("descriptionLine")
-    @Size(max = 255, min = 5, message = "{item.invalid-size}")
+    @Size(max = 10_000, min = 5, message = "{item.invalid-size}")
     @NotEmpty(message = "'descriptionLine' {item.mandatory-field}")
     private String descriptionLine;
 }
