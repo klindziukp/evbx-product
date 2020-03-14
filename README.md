@@ -5,7 +5,7 @@
 # evbx-product server
 Used to store Evbox products. Uses resources from '[evbx-resource](https://github.com/klindziukp/evbx-resource)' server 
 
-##OpenAPI Specification
+## OpenAPI Specification
 * Open [swagger-editor](http://editor.swagger.io/)
 * Import file from `contract/evbx-product-contract.yaml`
 ## Set up database
