@@ -10,13 +10,14 @@ Used to store Evbox products. Uses resources from '[evbx-resource](https://githu
 * Import file from `contract/evbx-product-contract.yaml`
 ## Set up database
 #### Using docker MySQL image
-* Configure MySQL database in the `/src/main/resources/docker-compose.yml`
-* Execute command from __project root__ directory `docker-compose -f /src/main/resources/docker-compose.yml up -d`
+* If you already MySQL container installed and running - just create database(schema) `evbx_product`
+* Configure MySQL database in the `src/main/resources/docker-compose.yml`
+* Execute command from __project root__ directory `docker-compose -f src/main/resources/docker-compose.yml up -d`
 * Verify that MySQL container is started with command `docker ps`
 * Create database `evbx_product`
-#### Using MySqL
+#### Using MySqL instead of docker image
 * Install MySQL database
-* Create database `evbx_product`
+* Create database(schema) `evbx_product`
 
 ## Database migrations
 * Update database configuration in `src/main/resources/application.yml` according to MySQL db configuration
@@ -35,9 +36,10 @@ flyway {
 }
 ```
 * Execute command from __project root__ directory `./gradlew flywayMigrate`
+* If some errors appeared - execute command from __project root__ directory `./gradlew flywayRepair`
 ## Application configuration
 * Current application uses resources from `evbx-resources` service,
- please make sure that `evbx-resources` is running
+ please make sure that `evbx-resources` service is running
 * Configure `ebvx-resources` server endpoint in `src/main/resources/application.yml`
 ```
 service:
