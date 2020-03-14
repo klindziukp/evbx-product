@@ -1,6 +1,6 @@
-DELETE FROM description;
-DELETE FROM product_model;
-DELETE FROM product;
+DELETE FROM `description`;
+DELETE FROM `product_model`;
+DELETE FROM `product`;
 
 INSERT INTO product (product_name,created_by) VALUES
  ('Home Chargers','script'),
