@@ -5,7 +5,7 @@
 # evbx-product server
 Used to store Evbox products. Uses resources from '[evbx-resource](https://github.com/klindziukp/evbx-resource)' server 
 
-##OpenAPI Specification
+## OpenAPI Specification
 * Open [swagger-editor](http://editor.swagger.io/)
 * Import file from `contract/evbx-product-contract.yaml`
 ## Set up database
@@ -38,7 +38,7 @@ flyway {
 ## Application configuration
 * Current application uses resources from `evbx-resources` service,
  please make sure that `evbx-resources` is running
-* Configure `ebvx-resources` server endpoint in `src/mainresources/application.yml`
+* Configure `ebvx-resources` server endpoint in `src/main/resources/application.yml`
 ```
 service:
   resource:
