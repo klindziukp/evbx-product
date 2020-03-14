@@ -1,0 +1,786 @@
+openapi: 3.0.1
+info:
+  title: Evbox Product Service API
+  description: >
+    This API provides the following functionality:
+      * Retrieves, creates, and updates information related to Evbox Product.
+      
+    Notes:
+      * Uses resources 'E-Book', 'Industry Report', 'Specification' for Evbox Resource Server
+  version: '1.1.0-SNAPSHOT'
+servers:
+  - url: http://localhost:8000/
+    description: Local Server
+tags:
+  - name: product
+    description: Endpoints for managing ' Product ' resource data.
+  - name: product-models
+    description: Endpoints for managing ' Product Models ' resource data.
+  - name: product-models-descriptions
+    description: Endpoints for managing ' Product Model Description ' data.
+
+paths:
+  '/v1/evbx/products':
+    get:
+      tags:
+       - product
+      description: Returns all ' Product ' items.
+      responses:
+        200:
+          description: Returns all ' Product ' items
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductItems'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBadRequest'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInternal'
+  '/v1/evbx/products/':
+    post:
+      tags:
+      - product
+      description: Creates ' Product ' entity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductMutationItem'
+        description: Creates ' Product ' entity
+        required: true
+      responses:
+        200:
+          description: Returns the ' Product ' entity that was created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductMutationItem'
+        400:
+          description: Bad Request 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBadRequest'
+        500:
+          description: Internal Server Error              
+  '/v1/evbx/products/{id}':
+    get:
+      tags:
+       - product
+      description: Returns 'E-book' based on id.
+      parameters:
+      - name: id
+        in: path
+        description: The ' Product ' Id to map entity
+        schema:
+            type: integer
+        required: true
+      responses:
+        200:
+          description: Return a ' Product ' mapped by Id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductItem'
+        400:
+          description: Bad Request 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBadRequest'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorNotFound'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInternal'
+    patch:
+      tags:
+       - product
+      description: Updates ' Product ' based on id.
+      parameters:
+      - name: id
+        in: path
+        description: The ' Product ' Id to map entity
+        schema:
+            type: integer
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductMutationItem'
+        description: Updates ' Product ' entity
+        required: true
+      responses:
+        200:
+          description: Returns the ' Product ' entity that was updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductMutationItem'
+        400:
+          description: Bad Request 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBadRequest'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorNotFound'        
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInternal'
+    delete:
+      tags:
+      - product
+      description: Deletes ' Product ' entity
+      parameters:
+      - name: id
+        in: path
+        description: The E-Book Id to map entity
+        schema:
+            type: integer
+        required: true
+      responses:
+        200:
+          description: Returns message the ' Product ' entity that was deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductDeletedItem'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorNotFound'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInternal'     
+  '/v1/evbx/product-models':
+    get:
+      tags:
+       - product-models
+      description: Returns all ' Product Model ' items.
+      responses:
+        200:
+          description: Returns all ' Product Model ' items
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductModelItems'
+        400:
+          description: Bad Request 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBadRequest'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInternal'
+  '/v1/evbx/product-models/':
+    post:
+      tags:
+      - product-models
+      description: Creates ' Product Model ' entity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductModelMutationItem'
+        description: Creates ' Product Model ' entity
+        required: true
+      responses:
+        200:
+          description: Returns the ' Product Model ' entity that was created.
+          content:
+            application/json:
+             schema:
+               $ref: '#/components/schemas/ProductModelMutationItem'
+        400:
+          description: Bad Request 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBadRequest'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInternal'              
+  '/v1/evbx/product-models/{id}':
+    get:
+      tags:
+       - product-models
+      description: Returns ' Product Model ' based on id.
+      parameters:
+      - name: id
+        in: path
+        description: The ' Product Model ' Id to map entity
+        schema:
+            type: integer
+        required: true
+      responses:
+        200:
+          description: Return a ' Product Model ' mapped by Id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductModelItem'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorNotFound'
+        500:
+          description: Internal Server Error
+    patch:
+      tags:
+       - product-models
+      description: Updates ' Product Model ' based on id.
+      parameters:
+      - name: id
+        in: path
+        description: The ' Product Model ' Id to map entity
+        schema:
+            type: integer
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductModelMutationItem'
+        description: Updates ' Product Model ' entity
+        required: true
+      responses:
+        200:
+          description: Returns the ' Product Model ' entity that was updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductModelMutationItem'
+        400:
+          description: Bad Request 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBadRequest'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorNotFound'        
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInternal'
+    delete:
+      tags:
+      - product-models
+      description: Deletes ' Product Model ' entity
+      parameters:
+      - name: id
+        in: path
+        description: The ' Product Model ' Id to map entity
+        schema:
+            type: integer
+        required: true
+      responses:
+        200:
+          description: Returns message the ' Product Model ' entity that was deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductDeletedItem'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorNotFound'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInternal'     
+  '/v1/evbx/descriptions':
+    get:
+      tags:
+       - product-models-descriptions
+      description: Returns all ' Product Model Description ' items.
+      responses:
+        200:
+          description: Returns all ' Product Model Description ' items
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescriptionItems'
+        400:
+          description: Bad Request 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBadRequest'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInternal'
+  '/v1/evbx/descriptions/':
+    post:
+      tags:
+      - product-models-descriptions
+      description: Creates 'E-book' entity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescriptionMutationItem'
+        description: Creates 'Specification' entity
+        required: true
+      responses:
+        200:
+          description: Returns the 'Specification' entity that was created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescriptionMutationItem'
+        400:
+          description: Bad Request 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBadRequest'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInternal'                      
+  '/v1/evbx/descriptions/{id}':
+    get:
+      tags:
+       - product-models-descriptions
+      description: Returns ' Product Model Description ' based on id.
+      parameters:
+      - name: id
+        in: path
+        description: The Product Model Description Id to map entity
+        schema:
+            type: integer
+        required: true
+      responses:
+        200:
+          description: Return a Product Model Description mapped by Id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescriptionItem'
+        400:
+          description: Bad Request 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBadRequest'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorNotFound'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInternal'
+    patch:
+      tags:
+       - product-models-descriptions
+      description: Updates ' Product Model Description ' based on id.
+      parameters:
+      - name: id
+        in: path
+        description: The Specification Id to map entity
+        schema:
+            type: integer
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/DescriptionMutationItem'
+        description: Updates ' Product Model Description ' entity
+        required: true
+      responses:
+        200:
+          description: Returns the 'Product Model Description' entity that was updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescriptionMutationItem'
+        400:
+          description: Bad Request 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBadRequest'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorNotFound'        
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInternal'
+    delete:
+      tags:
+      - product-models-descriptions
+      description: Deletes 'Specification' entity
+      parameters:
+      - name: id
+        in: path
+        description: The E-Book Id to map entity
+        schema:
+            type: integer
+        required: true
+      responses:
+        200:
+          description: Returns message the 'Specification' entity that was deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescriptionMutationItem'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorNotFound'
+        500:
+          description: Internal Server Error     
+  
+components:
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorBadRequest'
+    NotFound:
+      description: Resource Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorNotFound'
+    ServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorInternal'
+  schemas:
+    ErrorBadRequest:
+      type: object
+      required:
+        - timestamp
+        - status
+        - error
+        - errorMessages
+        - message
+        - path
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          example: 2020-03-09T18:33:53.209+0000
+        status:
+          type: integer
+          format: int32
+          description: Response status
+          example: 400
+        error:
+          type: string
+          description: Error message
+          example: Bad Request
+        errorMessages:
+          type: array
+          items:
+            type: string
+            description: Detailed error message
+            example: Product item name is mandatory field
+        message:
+          type: string
+          description: Detailed error message
+          example: Validation failed
+        path:
+          type: string
+          description: Endpoint that was invoked
+          nullable: true
+          example: /v1/evbx/product-items/
+    ErrorInternal:
+      type: object
+      required:
+        - timestamp
+        - status
+        - error
+        - message
+        - path
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          example: 2020-03-09T18:33:53.209+0000
+        status:
+          type: integer
+          format: int32
+          description: response status
+          example: 500
+        error:
+          type: string
+          description: Concise error message
+          example: Internal Server Error
+        message:
+          type: string
+          description: Detailed error message
+          example: Internal error message example 
+        path:
+          type: string
+          description: endpoint that was invoked
+          nullable: true
+          example: /v1/evbx/product-items/
+    ErrorNotFound:
+      type: object
+      required:
+        - timestamp
+        - status
+        - error
+        - message
+        - path
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          example: 2020-03-09T18:33:53.209+0000
+        status:
+          type: integer
+          format: int32
+          description: response status
+          example: 404
+        error:
+          type: string
+          description: Concise error message
+          example: Not Found
+        message:
+          type: string
+          description: Detailed error message
+          example: Product item not found with id = {id}.
+        path:
+          type: string
+          description: endpoint that was invoked
+          nullable: true
+          example: /v1/evbx/product-items/{id}
+    ProductItem:
+      type: object
+      required:
+        - productId
+        - modelName
+      properties:
+        id:
+          type: integer
+          description: product item id
+          example: 1
+          nullable: false
+        productName:
+          type: string
+          description: product item name
+          example: product name
+          nullable: false  
+        models:
+          type: array
+          items:
+              $ref: '#/components/schemas/ProductModelItem'
+    ProductMutationItem:
+      type: object
+      required:
+        - productName
+      properties:
+        productName:
+          type: string
+          description: product item name
+          example: product name to update
+          nullable: false  
+    ProductModelItem:
+      type: object
+      required:
+        - productId
+        - modelName
+      properties:
+        id:
+          type: integer
+          description: item id
+          example: 1
+          nullable: false
+        productId:
+          type: integer
+          description: product item id
+          example: 1
+          nullable: false 
+        resources:
+          $ref: '#/components/schemas/ResourcesItems'
+    ProductModelMutationItem:
+      type: object
+      required:
+        - productId
+        - modelName
+      properties:
+        productId:
+          type: integer
+          description: product item id
+          example: 1
+          nullable: false
+        modelName:
+          type: string
+          description: product model name 
+          example: product model name
+          nullable: false   
+        bookId:
+          type: integer
+          description: E-Book resource item id
+          example: 1
+          nullable: true
+        industryReportId:
+          type: integer
+          description: Industry report resource item id
+          example: 1
+          nullable: true
+        specificationId:
+          type: integer
+          description: Specification resource item id
+          example: 1
+          nullable: true
+    DescriptionItem:
+      type: object
+      required:
+        - modelId
+        - descriptionLine
+      properties:
+        id:
+          type: integer
+          description: item id
+          example: 1
+          nullable: false
+        modelId:
+          type: integer
+          description: product model item id
+          example: 1
+          nullable: false
+        descriptionLine:
+          type: string
+          description: description line for product model
+          example: this is example description line for product model item
+          nullable: false
+    DescriptionMutationItem:
+      required:
+        - modelId
+        - descriptionLine
+      type: object
+      properties:
+        modelId:
+          type: integer
+          description: product model item id
+          example: 1
+          nullable: false
+        descriptionLine:
+          type: string
+          description: description line for product model
+          example: description line for product model
+          nullable: false        
+    ProductDeletedItem:
+      type: string
+      example: Deleted item with id = 1
+    ResourceItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: item id
+          example: 1
+          nullable: false
+        text:
+          type: string
+          description: text for resource item
+          example: this is example text for resource item
+          nullable: false
+        description:
+          type: string
+          description: description of the resource item
+          example: this is example description for resource item
+          nullable: false
+        name:
+          type: string
+          description: name of resource
+          example: resourceName
+          nullable: false 
+    ResourcesItems:
+      type: object
+      properties:
+        book:
+          $ref: '#/components/schemas/ResourceItem'
+        industryReport:
+          $ref: '#/components/schemas/ResourceItem'
+        specification:
+          $ref: '#/components/schemas/ResourceItem'    
+    ProductItems:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProductItem'
+    ProductModelItems:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProductModelItem'
+    DescriptionItems:
+      type: array
+      items:
+        $ref: '#/components/schemas/DescriptionItem'
+
+      

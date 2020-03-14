@@ -1,0 +1,18 @@
+env:
+  global:
+    - CODECOV_TOKEN=b040177c-c3c6-4607-aeaa-7e85545b708f
+language: java
+jdk:
+  - openjdk8
+addons:
+  sonarcloud:
+    organization: klindziukp-github
+    token:
+      secure: wSmruDOOYoRV9D5HB1kxZXnf5w2BDW56R2CAX1W4HtRpXMQqaaxED84GPSNc/ggo42P0Y63AGGsGfO6rwOZQfWTspLjLWg/udw42P0tQUd+jHTxCzVFK8MdksL/xeofPfr61OF92t5HQG5FoQ4wmPknbVYOYV8NFChiDxA4ztUu/g1hTiqCEXb0u6Pi0aP3L+wwAP8WfLKiDhpuqVIgenEldTJc4N5qTbq/EcbbftiNpfGXSIxveV/TxVScsZkSxXYksW2dkUtmcrT5x1kB7r+eTE9lz1lt62iWQRKm6H3YODfs8EhbUDlBFa5mzJco/zzXmAVzD/19LCJxn1rBop4ozT4mRh2ccM06F2CfHgBL+P/Dav3PlTyjhlY6PiMJrbFt6w8nNVEuibT6vZUHnp0SAgcJFKVoWIj5tl40tnquBwF8WWoP9HqjPWK6U7DE7kP0CWtlTyXa516tNLbZLMS28zOoArglTjFDYIhN2qY+UzCU3fOiGXLUbdSee6CVd+n25SHXFDbwgp0IxL/9BVz1sC04+XePY7QXVk3tNgFfGA5Vz7uY1AiIs6IC8rkAdqYR7vlVPGtqrYzXKVe9wAKfeYQ1rbHgTCdyu4UvAOziaEzl6V1WdMArRmVwbGKOrOcF8wxc9p5gNSk625J8ZCevM7J8WmLMwleHHB4554EA=
+before_install:
+  - chmod +x gradlew
+script:
+  - ./gradlew build -i --continue
+  - ./gradlew sonarqube
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
