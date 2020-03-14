@@ -3,7 +3,7 @@
 [![Code Coverage](https://sonarcloud.io/api/project_badges/measure?project=klindziukp_evbx-product&metric=coverage)](https://sonarcloud.io/component_measures?id=klindziukp_evbx-product&metric=coverage)
 
 # evbx-product server
-Used to store Evbox products. Uses resources for '[evbx-resource](https://github.com/klindziukp/evbx-resources)' server 
+Used to store Evbox products. Uses resources from '[evbx-resource](https://github.com/klindziukp/evbx-resource)' server 
 
 ##OpenAPI Specification
 * Open [swagger-editor](http://editor.swagger.io/)
