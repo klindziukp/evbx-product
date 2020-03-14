@@ -59,7 +59,7 @@ test {
 
 sonarqube {
     properties {
-        property "sonar.projectKey", "klindziukp_evbx-зкщвгсе"
+        property "sonar.projectKey", "klindziukp_evbx-product"
         property "sonar.exclusions", "**/apiclient/**,**/config/**,**/constant/**,**/exception/**,**/model/**,**/util/**, **/EvbxProductApplication.java"
     }
 }
