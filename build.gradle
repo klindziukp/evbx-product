@@ -12,7 +12,7 @@ apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'jacoco'
 
-group = 'com.evbx.resource'
+group = 'com.evbx.product'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
@@ -62,7 +62,7 @@ test {
 sonarqube {
     properties {
         property "sonar.projectKey", "klindziukp_evbx-product"
-        property "sonar.exclusions", "**/apiclient/**,**/config/**,**/constant/**,**/exception/**,**/model/**,**/util/**, **/EvbxProductApplication.java"
+        property "sonar.exclusions", "**/apiclient/**,**/config/**,**/constant/**,**/exception/**,**/model/**,**/util/**,**/ApiClientServiceImpl.java,**/EvbxProductApplication.java"
     }
 }
 
@@ -80,6 +80,7 @@ jacocoTestReport {
                     '**/exception/**',
                     '**/model/**',
                     '**/util/**',
+                    '**/*ApiClientServiceImpl*.*',
                     '**/*EvbxProductApplication*.*'
             ])
         })
