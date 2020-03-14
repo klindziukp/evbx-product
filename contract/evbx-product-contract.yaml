@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.0.3
 info:
   title: Evbox Product Service API
   description: >
@@ -7,10 +7,10 @@ info:
       
     Notes:
       * Uses resources 'E-Book', 'Industry Report', 'Specification' for Evbox Resource Server
-  version: '1.1.0-SNAPSHOT'
+  version: '0.0.1-SNAPSHOT'
 servers:
   - url: http://localhost:8000/
-    description: Local Server
+    description: Local Application
 tags:
   - name: product
     description: Endpoints for managing ' Product ' resource data.

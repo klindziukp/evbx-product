@@ -26,7 +26,7 @@ import javax.validation.constraints.Size;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @JsonIgnoreProperties({ "createdAt", "updatedAt", "deletedAt", "createdBy", "updatedBy", "deletedBy" })
-@JsonPropertyOrder({ "id", "descriptionLine" })
+@JsonPropertyOrder({ "id", "modelId", "descriptionLine" })
 @ToString(exclude = "productModel")
 @Accessors(chain = true)
 public class Description extends UpdatableEntity {
