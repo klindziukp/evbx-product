@@ -29,8 +29,8 @@ import java.util.List;
 @Table(name = "product_model")
 @Data
 @EqualsAndHashCode(callSuper = true)
-@JsonIgnoreProperties({ "id", "createdAt", "updatedAt", "deletedAt", "createdBy", "updatedBy", "deletedBy" })
-@JsonPropertyOrder({ "modelName", "bookId", "industryReportId", "specificationReportId", "descriptions" })
+@JsonIgnoreProperties({"createdAt", "updatedAt", "deletedAt", "createdBy", "updatedBy", "deletedBy" })
+@JsonPropertyOrder({ "id", "modelName", "bookId", "industryReportId", "specificationReportId", "descriptions" })
 @ToString(exclude = "product")
 @Accessors(chain = true)
 public class ProductModel extends UpdatableEntity {
