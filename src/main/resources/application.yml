@@ -6,10 +6,10 @@ spring:
 server:
   servlet:
     context-path: /v1/evbx
-  port: 8000
+  port: 8001
 service:
   resource:
-    baseUrl: http://localhost:8001
+    baseUrl: http://localhost:8002
     username: user
     password: user
 magement:
