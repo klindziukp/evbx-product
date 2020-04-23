@@ -38,17 +38,17 @@ public class DescriptionController {
     }
 
     @PostMapping(value = "/descriptions", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity addDescription(@Valid @RequestBody Description description) {
+    public ResponseEntity<Description> addDescription(@Valid @RequestBody Description description) {
         return ResponseEntity.ok(descriptionService.save(description));
     }
 
     @PatchMapping(value = "/descriptions/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity updateDescription(@PathVariable long id, @RequestBody Description description) {
+    public ResponseEntity<Description> updateDescription(@PathVariable long id, @RequestBody Description description) {
         return ResponseEntity.ok(descriptionService.update(id, description));
     }
 
     @DeleteMapping(value = "/descriptions/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity deleteReport(@PathVariable long id) {
+    public ResponseEntity<String> deleteReport(@PathVariable long id) {
         descriptionService.deleteById(id);
         return ResponseEntity.ok(
                 String.format("%s item with id = %d successfully deleted. ", Item.DESCRIPTION, id));

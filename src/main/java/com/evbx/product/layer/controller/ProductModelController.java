@@ -39,17 +39,17 @@ public class ProductModelController {
     }
 
     @PostMapping(value = "/product-models", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity addProduct(@Valid @RequestBody ProductModel productModel) {
+    public ResponseEntity<ProductModel> addProduct(@Valid @RequestBody ProductModel productModel) {
         return ResponseEntity.ok(productModelService.save(productModel));
     }
 
     @PatchMapping(value = "/product-models/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity updateDescription(@PathVariable long id, @RequestBody ProductModel productModel) {
+    public ResponseEntity<ProductModel> updateDescription(@PathVariable long id, @RequestBody ProductModel productModel) {
         return ResponseEntity.ok(productModelService.update(id, productModel));
     }
 
     @DeleteMapping(value = "/product-models/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity deleteReport(@PathVariable long id) {
+    public ResponseEntity<String> deleteReport(@PathVariable long id) {
         productModelService.deleteById(id);
         return ResponseEntity.ok(
                 String.format("%s item with id = %d successfully deleted.", Item.PRODUCT_MODEL, id));
