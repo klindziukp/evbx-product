@@ -4,13 +4,11 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
 /**
  * Configuration properties for 'Api Client'
  */
 @Configuration
-@PropertySource("classpath:application.yml")
 @Data
 @ConfigurationProperties
 public class ServiceConfig {

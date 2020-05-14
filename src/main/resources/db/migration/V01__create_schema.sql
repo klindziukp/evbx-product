@@ -1,3 +1,5 @@
+USE evbx_product;
+
 CREATE TABLE IF NOT EXISTS `product` (
 	`id` BIGINT AUTO_INCREMENT,
     `product_name` VARCHAR(255),

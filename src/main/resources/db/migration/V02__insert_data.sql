@@ -1,3 +1,5 @@
+USE evbx_product;
+
 INSERT INTO product (product_name,created_by) VALUES
  ('Home Chargers','script'),
  ('Fast Chargers','script'),
