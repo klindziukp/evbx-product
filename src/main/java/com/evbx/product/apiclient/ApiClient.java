@@ -66,7 +66,7 @@ public final class ApiClient {
     private <T> T getErrorOfT(HttpStatusCodeException httpEx) {
         String errorBody = httpEx.getResponseBodyAsString();
         ErrorResponse errorResponse = JsonUtil.fromJson(errorBody, ErrorResponse.class);
-        LOGGER.warn("WARN Unable to get item from path '{}'", errorResponse.getPath());
+        LOGGER.warn("WARN {}", errorResponse.getMessage());
         return null;
     }
 }

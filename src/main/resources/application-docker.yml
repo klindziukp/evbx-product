@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:mysql://evbx-mysql/evbx_product
+    username: root
+    password: root
+server:
+  servlet:
+    context-path: /v1/evbx
+  port: 8001
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info,health,metrics,flyway
+service:
+  resource:
+    baseUrl: http://evbx-resource:8002
+    username: user
+    password: user

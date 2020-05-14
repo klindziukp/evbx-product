@@ -10,14 +10,14 @@ services:
       - 3306:3306
     environment:
       MYSQL_DATABASE: evbx_product
-      MYSQL_USER: root
       MYSQL_PASSWORD: root
       MYSQL_ROOT_PASSWORD: root
     networks:
-      - database
+      - evbx
 
 networks:
-  database:
+  evbx:
+    name: evbx
 
 volumes:
   mysqldata:
