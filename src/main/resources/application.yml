@@ -7,13 +7,13 @@ server:
   servlet:
     context-path: /v1/evbx
   port: 8001
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info,health,metrics,flyway
 service:
   resource:
     baseUrl: http://localhost:8002
     username: user
     password: user
-magement:
-  endpoints:
-    web:
-      exposure:
-        include: info, health, flyway

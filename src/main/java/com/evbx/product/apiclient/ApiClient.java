@@ -34,8 +34,7 @@ public final class ApiClient {
     public <T> T get(String path, Class<T> classOfT) {
         try {
             LOGGER.info("GET {}{}", serviceConfig.getBaseUrl(), path);
-            String jsonString = restTemplate.exchange(path, HttpMethod.GET, null, String.class).getBody();
-            return JsonUtil.fromJson(jsonString, classOfT);
+            return restTemplate.exchange(path, HttpMethod.GET, null, classOfT).getBody();
         } catch (HttpStatusCodeException httpEx) {
             return getErrorOfT(httpEx);
         }
