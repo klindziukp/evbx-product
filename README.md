@@ -14,7 +14,6 @@ Used to store Evbox products. Uses resources from '[evbx-resource](https://githu
 * Configure MySQL database in the `src/main/resources/docker-compose.yml`
 * Execute command from __project root__ directory `docker-compose -f src/main/resources/docker-compose.yml up -d`
 * Verify that MySQL container is started with command `docker ps`
-* Create database `evbx_product`
 #### Using MySqL instead of docker image
 * Install MySQL database
 * Create database(schema) `evbx_product`
