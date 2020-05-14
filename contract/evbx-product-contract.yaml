@@ -9,7 +9,7 @@ info:
       * Uses resources 'E-Book', 'Industry Report', 'Specification' for Evbox Resource Server
   version: '0.0.1-SNAPSHOT'
 servers:
-  - url: http://localhost:8000/
+  - url: http://localhost:8001/
     description: Local Application
 tags:
   - name: product
