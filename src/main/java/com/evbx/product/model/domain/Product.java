@@ -18,6 +18,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.List;
 
+import org.hibernate.annotations.Proxy;
+
 @Entity
 @Table(name = "product")
 @Data
@@ -25,9 +27,10 @@ import java.util.List;
 @JsonIgnoreProperties({ "createdAt", "updatedAt", "deletedAt", "createdBy", "updatedBy", "deletedBy" })
 @JsonPropertyOrder({ "id", "productName", "models" })
 @Accessors(chain = true)
+@Proxy(lazy = false)
 public class Product extends UpdatableEntity {
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JsonProperty("models")
     private List<ProductModel> models;
 

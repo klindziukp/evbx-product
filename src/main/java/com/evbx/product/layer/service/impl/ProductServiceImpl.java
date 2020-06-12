@@ -16,6 +16,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -36,7 +40,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Cacheable(value= "allProductsCache", unless= "#result.getTotal() == 0")
     public ItemData<ProductDto> getAllProducts() {
+        LOGGER.info("Get all products");
         List<ProductDto> products = new ArrayList<>();
         List<Product> persistedProducts = productRepository.findAll();
         composeProductsDto(products, persistedProducts);
@@ -44,15 +50,19 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Cacheable(value= "productCache", key= "'product'+#id")
     public ProductDto getProduct(long id) {
         ProductDto productDto = new ProductDto();
         Product product = productRepository.findById(id).orElseThrow(() -> new ItemNotFoundException(Item.PRODUCT, id));
         BeanUtils.copyProperties(product, productDto);
         productDto.setProductModels(composeProductModelsDto(product));
+        LOGGER.info("Get product with id = '{}'", id);
         return productDto;
     }
 
     @Override
+    @Caching(put = { @CachePut(value = "productCache", key = "'product'+#productDto.id") },
+             evict = { @CacheEvict(value = "allProductsCache", allEntries = true) })
     public Product save(Product product) {
         verifyProductPresence(product);
         product.setCreatedBy(AuthUtil.getUserName());
@@ -62,6 +72,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Caching(put = { @CachePut(value = "productCache", key = "'product'+#productDto.id") },
+             evict = { @CacheEvict(value = "allProductsCache", allEntries = true) })
     public Product update(long id, Product product) {
         Product persistedProductModel = productRepository.findById(id).orElseThrow(
                 () -> new ItemNotFoundException(Item.PRODUCT, id));
@@ -73,6 +85,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Caching(evict = { @CacheEvict(value = "productCache", key = "'product'+#id"),
+            @CacheEvict(value = "allProductsCache", allEntries = true) })
     public void deleteById(long id) {
         if (!productRepository.existsById(id)) {
             throw new ItemNotFoundException(Item.PRODUCT, id);

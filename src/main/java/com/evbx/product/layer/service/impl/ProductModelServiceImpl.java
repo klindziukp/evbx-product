@@ -15,6 +15,10 @@ import com.evbx.product.util.ValidationUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -37,19 +41,25 @@ public class ProductModelServiceImpl implements ProductModelService {
     }
 
     @Override
+    @Cacheable(value= "allModelsCache", unless= "#result.getTotal() == 0")
     public ItemData<ProductModelDto> getAllProductModels() {
         List<ProductModel> productModels = productModelRepository.findAll();
+        LOGGER.info("Get all productModels");
         return new ItemData<>(composeProductModelsDto(productModels));
     }
 
     @Override
+    @Cacheable(value= "modelCache", key= "'model'+#id")
     public ProductModelDto getProductModel(long id) {
+        LOGGER.info("Get product model with id = '{}'", id);
         ProductModel productModel = productModelRepository.findById(id)
                 .orElseThrow(() -> new ItemNotFoundException(Item.PRODUCT_MODEL, id));
         return composeProductModelDto(productModel);
     }
 
     @Override
+    @Caching(put = { @CachePut(value = "modelCache", key = "'model'+#productModel.id") },
+             evict = { @CacheEvict(value = "allModelsCache", allEntries = true) })
     public ProductModel save(ProductModel productModel) {
         verifyProductModel(productModel);
         productModel.setCreatedBy(AuthUtil.getUserName());
@@ -59,6 +69,8 @@ public class ProductModelServiceImpl implements ProductModelService {
     }
 
     @Override
+    @Caching(put = { @CachePut(value = "modelCache", key = "'model'+#productModel.id") },
+             evict = { @CacheEvict(value = "allModelsCache", allEntries = true) })
     public ProductModel update(long id, ProductModel productModel) {
         ProductModel persistedProductModel = productModelRepository.findById(id)
                 .orElseThrow(() -> new ItemNotFoundException(Item.PRODUCT_MODEL, id));
@@ -70,6 +82,8 @@ public class ProductModelServiceImpl implements ProductModelService {
     }
 
     @Override
+    @Caching(evict = { @CacheEvict(value = "modelCache", key = "'model'+#id"),
+                       @CacheEvict(value = "allModelsCache", allEntries = true) })
     public void deleteById(long id) {
         if (!productModelRepository.existsById(id)) {
             throw new ItemNotFoundException(Item.PRODUCT_MODEL, id);

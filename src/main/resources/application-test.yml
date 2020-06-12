@@ -1,6 +1,8 @@
 spring:
   flyway:
     enabled: false
+  cache:
+    type: none
   datasource:
     initialization-mode: always
     platform: h2

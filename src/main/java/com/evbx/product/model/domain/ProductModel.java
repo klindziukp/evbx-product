@@ -9,6 +9,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.experimental.Accessors;
+
+import org.hibernate.annotations.Proxy;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.CascadeType;
@@ -33,9 +35,10 @@ import java.util.List;
 @JsonPropertyOrder({ "id", "modelName", "bookId", "industryReportId", "specificationReportId", "descriptions" })
 @ToString(exclude = "product")
 @Accessors(chain = true)
+@Proxy(lazy = false)
 public class ProductModel extends UpdatableEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id", nullable = false, insertable = false, updatable = false)
     @JsonBackReference
     private Product product;
@@ -67,7 +70,7 @@ public class ProductModel extends UpdatableEntity {
     @NotEmpty(message = "'modelName' {item.mandatory-field}")
     private String modelName;
 
-    @OneToMany(mappedBy = "productModel", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "productModel", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JsonProperty("descriptions")
     private List<Description> descriptions = Collections.emptyList();
 }

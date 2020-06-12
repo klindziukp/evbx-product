@@ -12,6 +12,10 @@ import com.evbx.product.util.ValidationUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -28,16 +32,24 @@ public class DescriptionServiceImpl implements DescriptionService {
     }
 
     @Override
+    @Cacheable(value = "allDescCache", unless = "#result.getTotal() == 0")
     public ItemData<Description> getAllDescriptions() {
+        LOGGER.info("Get all descriptions");
         return new ItemData<>(descriptionRepository.findAll());
     }
 
     @Override
+    @Cacheable(value= "descCache", key= "'desc'+#id")
     public Description getDescription(long id) {
-        return descriptionRepository.findById(id).orElseThrow(() -> new ItemNotFoundException(Item.DESCRIPTION, id));
+        LOGGER.info("Get description with id = '{}'", id);
+        return
+                descriptionRepository.findById(id).orElseThrow(() -> new ItemNotFoundException(Item.DESCRIPTION, id));
+
     }
 
     @Override
+    @Caching(put = { @CachePut(value = "descCache", key = "'desc'+#description.id") },
+             evict = { @CacheEvict(value = "allDescCache", allEntries = true) })
     public Description save(Description description) {
         verifyDescriptionItem(description);
         description.setCreatedBy(AuthUtil.getUserName());
@@ -47,6 +59,8 @@ public class DescriptionServiceImpl implements DescriptionService {
     }
 
     @Override
+    @Caching(put = { @CachePut(value = "descCache", key = "'desc'+#description.id") },
+             evict = { @CacheEvict(value = "allDescCache", allEntries = true) })
     public Description update(long id, Description description) {
         Description persistedDesc = descriptionRepository.findById(id).orElseThrow(
                 () -> new ItemNotFoundException(Item.DESCRIPTION, id));
@@ -58,6 +72,8 @@ public class DescriptionServiceImpl implements DescriptionService {
     }
 
     @Override
+    @Caching(evict = { @CacheEvict(value = "descCache", key = "'desc'+#id"),
+                       @CacheEvict(value = "allDescCache", allEntries = true) })
     public void deleteById(long id) {
         if (!descriptionRepository.existsById(id)) {
             throw new ItemNotFoundException(Item.DESCRIPTION, id);

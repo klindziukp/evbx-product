@@ -13,11 +13,13 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import java.io.Serializable;
 import java.util.Date;
 
 @MappedSuperclass
 @Data
-public abstract class UpdatableEntity {
+public abstract class UpdatableEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

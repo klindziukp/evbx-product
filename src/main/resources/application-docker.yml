@@ -4,6 +4,9 @@ info:
     description: REST Service for retrievieng ' Product ' information
     version: 0.0.1-SNAPSHOT
 spring:
+  redis:
+    host: evbx-redis
+    port: 6379
   datasource:
     url: jdbc:mysql://evbx-mysql/evbx_product
     username: root

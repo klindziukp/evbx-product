@@ -1,5 +1,7 @@
 package com.evbx.product.model.domain;
 
+import java.io.Serializable;
+
 import com.evbx.product.model.UpdatableEntity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -9,6 +11,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.experimental.Accessors;
+
+import org.hibernate.annotations.Proxy;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.Column;
@@ -29,9 +33,10 @@ import javax.validation.constraints.Size;
 @JsonPropertyOrder({ "id", "modelId", "descriptionLine" })
 @ToString(exclude = "productModel")
 @Accessors(chain = true)
-public class Description extends UpdatableEntity {
+@Proxy(lazy = false)
+public class Description extends UpdatableEntity implements Serializable {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "model_id", nullable = false, insertable = false, updatable = false)
     @JsonBackReference
     private ProductModel productModel;
